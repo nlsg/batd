@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+'''
+a minimalistic program to observe your battery
+'''
 import psutil
 import sys, os
 import time as t
