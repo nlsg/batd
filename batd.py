@@ -8,6 +8,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import daemon_class
 from configparser import ConfigParser
+'''
+this daemon is not ready for use, yet
+'''
 
 class Batd(daemon_class.Daemon):
     def __init__(self, pidfile, log_file = "/tmp/batd.csv", csv_file = "/tmp/batd.csv", ini_file = "batd.ini"):
