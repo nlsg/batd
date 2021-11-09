@@ -5,6 +5,9 @@ and makes statistics about it
 it is just one python script and one class for the daemon functionallity,
 all written in python
 
+# dependancies
+this daemon is not crossplatform yet, it just works on unix
+
 # installation
 no installation is required, but a python3.x.x iinterpreter
 
