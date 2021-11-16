@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+#TODO
+#adding expire-time setting in ini
+
 import psutil
 import sys, os
 import time as t
@@ -45,13 +48,14 @@ class Batd(daemon_class.Daemon):
 
             battery_percent = psutil.sensors_battery().percent
             date = dt.now().strftime("%d-%b_%H:%M")
-            log = f"{battery_percent:.2f},{date=},{it=}, {nf=}, {nt=}, {bwt=},{bct=}\n"
+            #log = f"{battery_percent:.2f},{date=},{it=}, {nf=}, {nt=}, {bwt=},{bct=}\n"
+            log = f"{battery_percent:.2f},{date}\n"
             with open(self.log_file, "a") as f:
                 f.write(log)
 
             if int(battery_percent) < bwt:
                 if it % nf:
-                    nut.notify("batd", f"{battery_percent}", f"-t {nt} " + " --urgency=critical " if battery_percent <= bct else "")
+                    nut.notify("batd", f"{battery_percent}", " --urgency=critical " if battery_percent <= bct else "")
             
     def parse_ini(self):
         self.standard_cft = {
@@ -91,10 +95,14 @@ class Batd(daemon_class.Daemon):
         os.system(f"rm {self.log_file}")
 
     def pd_(self):
-        df = pd.read_csv(self.log_file)
+        df = pd.read_csv(self.log_file, index_col=1)
         df.plot()
-        plt.show()
+        print(df)
+        if input("[s]how plot\n>") == "s":plt.show()
 
+    def query(self):
+        os.system("bat")
+#if __name__ == "__main__"
 batd = Batd('/tmp/batd.pid')
 options = {"start":     batd.start 
         ,"stop":        batd.stop 
@@ -102,10 +110,12 @@ options = {"start":     batd.start
         ,"log":         batd.cat_log
         ,"ini":         batd.parse_ini
         ,"clean":       batd.clean
-        ,"clean log":   batd.clean_log
-        ,"clean ini":   batd.clean_ini
+        ,"cleanlog":    batd.clean_log
+        ,"cleanini":    batd.clean_ini
         ,"pd":          batd.pd_
+        ,"query":       batd.query
         }
+
 def usage_die(false_arg = ""):
     print(nut.cli["BOLD"]) 
     if false_arg != "":print(f"no argument named {false_arg} ...")
