@@ -10,11 +10,17 @@ look into the code.
 batd generates an ini-file where you can set a few configurations.
 ```
 [batd]
-scan_rate = [int] in sec; how often the daemon fetches battery info
-notify_factor = [int] facotor of scan_rate; determines how often notifications get send  
-log_file = [path] the file where the daemon should log the information
-battery_warn_trashhold = trashhold for warning notifications
-battery_critical_trashhold = trashhold for critical notifications(in red)
+scan_rate = [int] 
+;in sec; how often the daemon fetches battery info
+notify_factor = [int] 
+;facotor of scan_rate; determines how often notifications get send  
+log_file = [path] 
+;the file where the daemon should log the information
+battery_warn_trashhold = 
+;trashhold for warning notifications
+battery_critical_trashhold = 
+;trashhold for critical notifications(in red)
+```
 
 # dependencies
 due to various system calls this daemon is not cross-platform yet, it just works on unix systems
