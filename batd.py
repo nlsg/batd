@@ -22,6 +22,7 @@ class Batd(daemon_class.Daemon):
         self.ini_file = ini_file
         if not os.path.exists(self.ini_file):
             os.system(f"touch {self.ini_file}")
+            print("initialized ini-file")
         self.ini = ConfigParser()
         self.ini.read(self.ini_file)
         self.parse_ini()
@@ -47,7 +48,7 @@ class Batd(daemon_class.Daemon):
             nf, nt, bwt, bct = int(cf["notify_factor"]), int(cf["notify_time_ms"]), int(cf["battery_warn_trashhold"]), int(cf["battery_critical_trashhold"])
 
             battery_percent = psutil.sensors_battery().percent
-            date = dt.now().strftime("%d-%b_%H:%M")
+            date = dt.now().strftime("%d-%m_%H:%M")
             #log = f"{battery_percent:.2f},{date=},{it=}, {nf=}, {nt=}, {bwt=},{bct=}\n"
             log = f"{battery_percent:.2f},{date}\n"
             with open(self.log_file, "a") as f:
@@ -95,7 +96,7 @@ class Batd(daemon_class.Daemon):
         os.system(f"rm {self.log_file}")
 
     def pd_(self):
-        df = pd.read_csv(self.log_file, index_col=1)
+        df = pd.read_csv(self.log_file, index_col=1, names=["bat", "date"], parse_dates=True)
         df.plot()
         print(df)
         if input("[s]how plot\n>") == "s":plt.show()

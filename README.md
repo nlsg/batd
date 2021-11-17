@@ -1,5 +1,5 @@
 # batd.py
-a simple minimalistic battery daemon, which observes the battery
+A simple minimalistic battery daemon, which observes the battery,
 and collects interesting data about it.
 
 it is just one python script and one class for the daemon functionality,
@@ -25,9 +25,9 @@ battery_critical_trashhold =
 # dependencies
 due to various system calls this daemon is not cross-platform yet, it just works on unix systems
 
-dependency on nlsg-programs:
+Dependency on nlsg-programs:
 so far the "query" option is dependent on the bat c-program, this is going to be fixed soon.
-the notification system is dependent on the "nls_util.py" library
+The notification system is dependent on the "nls_util.py" library
 
 # installation
 no installation is required, but a python3.x.x interpreter
@@ -38,4 +38,4 @@ type batd.py help, to get all available argument
 
 # todo
  - adding expire time setting
-
+ - extend pandas capability
