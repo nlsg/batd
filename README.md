@@ -23,11 +23,16 @@ battery_critical_trashhold =
 ```
 
 # dependencies
-due to various system calls this daemon is not cross-platform yet, it just works on unix systems
+due to various system calls this daemon is not cross-platform yet, it just works on unix systems,
+it also imports the psutil module, to query the battery capacity,
+pandas and matplotlib to view the data,
+and configparser to parse the ini-file.
+The notification system is dependent on the "nls_util.py" library, which is dependent on the "notify-send" pkg, however it should be easy to implement another notify pkg, just redefine the "nut.notify(str,str)" function.
+
+psutil and configparser are necessary.
 
 Dependency on nlsg-programs:
 so far the "query" option is dependent on the bat c-program, this is going to be fixed soon.
-The notification system is dependent on the "nls_util.py" library
 
 # installation
 no installation is required, but a python3.x.x interpreter
