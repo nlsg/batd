@@ -48,7 +48,7 @@ class Batd(daemon_class.Daemon):
             nf, nt, bwt, bct = int(cf["notify_factor"]), int(cf["notify_time_ms"]), int(cf["battery_warn_trashhold"]), int(cf["battery_critical_trashhold"])
 
             battery_percent = psutil.sensors_battery().percent
-            date = dt.now().strftime("%d-%m_%H:%M")
+            date = dt.now().strftime("%d/%m/%H/%M")
             #log = f"{battery_percent:.2f},{date=},{it=}, {nf=}, {nt=}, {bwt=},{bct=}\n"
             log = f"{battery_percent:.2f},{date}\n"
             with open(self.log_file, "a") as f:
